@@ -276,11 +276,13 @@ function mostPointsScored(){
     const objName = gameObject()
 
     let highestPoints = 0
+    let topplayer;
 
     if(objName.home) {
         for(let player in objName.home.players){
             if(objName.home.players[player].points > highestPoints){
                  highestPoints = objName.home.players[player].points
+                 topplayer = player
             }
     }
 
@@ -290,9 +292,79 @@ if(objName.away) {
     for(let player in objName.away.players){
         if(objName.away.players[player].points > highestPoints){
             highestPoints = objName.away.players[player].points
+            topplayer = player
         }
 }
 
 }
-return highestPoints
+return topplayer
+}
+
+function winningTeam(){
+    const objName = gameObject()
+
+    let homeTeamPoints = 0
+    let awayTeamPoints = 0
+
+    
+
+    
+
+        for (let player in objName.home.players){
+            let pointsPerplayer = objName.home.players[player].points
+           
+                homeTeamPoints += pointsPerplayer
+               
+            
+        }
+
+
+        for(let player in objName.away.players){
+            let pointsPerplayer = objName.away.players[player].points
+            
+
+                awayTeamPoints += pointsPerplayer
+
+            
+        }
+
+        if(homeTeamPoints>awayTeamPoints){
+            return objName.home.teamName
+        }
+        else if(awayTeamPoints > homeTeamPoints){
+            return objName.away.teamName
+        } else{
+            return "It is a tie"
+        } 
+
+
+}
+function playerWithLongestName(){
+
+   const objName = gameObject()
+   let playerName=''
+
+   
+    for(let player in objName.home.players){
+    
+
+    if( player.length > playerName.length){
+        playerName = player
+    }
+     
+        
+    }
+
+    for(let player in objName.away.players){
+    
+
+        if( player.length > playerName.length){
+            playerName = player
+        }
+         
+            
+        }
+        
+    return playerName
+   
 }
