@@ -271,3 +271,28 @@ function bigShoeRebounds(){
     return rebounds
 
 }
+
+function mostPointsScored(){
+    const objName = gameObject()
+
+    let highestPoints = 0
+
+    if(objName.home) {
+        for(let player in objName.home.players){
+            if(objName.home.players[player].points > highestPoints){
+                 highestPoints = objName.home.players[player].points
+            }
+    }
+
+}
+
+if(objName.away) {
+    for(let player in objName.away.players){
+        if(objName.away.players[player].points > highestPoints){
+            highestPoints = objName.away.players[player].points
+        }
+}
+
+}
+return highestPoints
+}
