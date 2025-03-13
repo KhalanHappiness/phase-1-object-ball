@@ -159,62 +159,72 @@ function gameObject(){
 
 // }
 
+const objName = gameObject()
+
 function numPointsScored(playerName){
-
-    let object = gameObject()
-
-    if(object.home.players[playerName]){
-        return object.home.players[playerName].number
-    }
-    else if (object.away.players[playerName]){
-        return object.away.players[playerName].number
-    }
-    else{
-        return 'player not found'
-    }
-
-}
-function shoeSize(playerName){
-
-    let object1 = gameObject()
-
-    if(object1.home.players[playerName]){
-        return object1.home.players[playerName].shoe
-    }
-    else if (object1.away.players[playerName]){
-        return object1.away.players[playerName].shoe
-    }
-    else{
-        return 'player not found'
-    }
-
-
-}
-
-function teamColors(teamName){
-
-    let objName = gameObject()
-
-    return objName[teamName].colors
 
     
 
+    if(objName.home.players[playerName]){
+        return objName.home.players[playerName].points
+    }
+    else if (objName.away.players[playerName]){
+        return objName.away.players[playerName].points
+    }
+    else{
+        return 'player not found'
+    }
+
 }
+
+console.log(numPointsScored("Mason Plumlee"))
+function shoeSize(playerName){
+
+    
+
+    if(objName.home.players[playerName]){
+        return objName.home.players[playerName].shoe
+    }
+    else if (objName.away.players[playerName]){
+        return objName.away.players[playerName].shoe
+    }
+    else{
+        return 'player not found'
+    }
+
+
+}
+console.log(shoeSize("Mason Plumlee"))
+
+function teamColors(teamName){
+
+   
+
+   for(let team in objName){
+    if (objName[team].teamName === teamName){
+        return objName[team].colors
+    }
+   }
+   return 'team not found'
+    
+
+}
+console.log(teamColors("Charlotte Hornets"))
 function teamNames(){
-    let objName = gameObject()
 
     return `${objName.home.teamName}, ${objName.away.teamName}`
 
 
 
 }
+console.log(teamNames())
 function playerNumbers(teamName){
 
-    let object2 = gameObject()
+    
 
-    for(let key in object2){
-        if (object2[key].teamName === teamName){
-            return Object.values(object2[key].players).map(player=>player.number)
+    for(let key in objName){
+        if (objName[key].teamName === teamName){
+            return Object.values(objName[key].players).map(player=>player.number)
         } else {
 
             return 'team not found'
@@ -223,10 +233,9 @@ function playerNumbers(teamName){
 
 
 }
+console.log(playerNumbers("Brooklyn Nets"))
 
 function playerStats(playerName){
-    const objName = gameObject()
-
 
 
     if(objName.home.players[playerName]){
@@ -239,41 +248,38 @@ function playerStats(playerName){
         return 'player not found'
     }
 }
-function bigShoeRebounds(){
+console.log(playerStats("Mason Plumlee"))
 
-    const objName = gameObject()
+function bigShoeRebounds() {
+     
+    let playerWithLargestShoe = null;
+    let largestShoeSize = 0;
 
-    let largestShoeSize = 0
-    let rebounds = 0
-
-    if(objName.home){
-        for(const player in objName.home.players){
-            debugger
-            if(objName.home.players[player].shoe > largestShoeSize){
-                largestShoeSize = objName.home.players[player].shoe
-                rebounds = objName.home.players[player].rebounds
-            }
-        }
-
-
-
-    }
-    else if(objName.away ){
-        if(objName.away){
-            for(const player in objName.home.players){
-                if(objName.home.players[player].shoe > largestShoeSize){
-                    largestShoeSize = objName.away.players[player].shoe
-                    rebounds = objName.away.players[player].rebounds
-                }
+    
+    function checkPlayers(players) {
+        for (const playerName in players) {
+            const player = players[playerName];
+            if (player.shoe > largestShoeSize) {
+                largestShoeSize = player.shoe;
+                playerWithLargestShoe = player;
             }
         }
     }
-    return rebounds
+    
+    checkPlayers(objName.home.players); // checks the player with the largest shoe size in home
 
+    
+    checkPlayers(objName.away.players); // checks the player with largest shoe size in 
+
+    //return playerWithLargestShoe;
+    return playerWithLargestShoe.rebounds;
 }
 
+console.log(bigShoeRebounds())
+
+
 function mostPointsScored(){
-    const objName = gameObject()
+    
 
     let highestPoints = 0
     let topplayer;
@@ -299,9 +305,10 @@ if(objName.away) {
 }
 return topplayer
 }
+console.log(mostPointsScored())
 
 function winningTeam(){
-    const objName = gameObject()
+    
 
     let homeTeamPoints = 0
     let awayTeamPoints = 0
@@ -339,9 +346,10 @@ function winningTeam(){
 
 
 }
+console.log(winningTeam())
 function playerWithLongestName(){
 
-   const objName = gameObject()
+   
    let playerName=''
 
    
@@ -368,3 +376,4 @@ function playerWithLongestName(){
     return playerName
    
 }
+console.log(playerWithLongestName())
